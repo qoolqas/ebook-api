@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/me', function () {
+    return ["nis" =>"3103118113", "name" => "Raveendra Al Kautsar","gender" => "Laki Laki","phone" => "089528281919","class" => "XI RPL 4"];
+});
