@@ -53,7 +53,7 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        //
+        return Book::find($id);
     }
 
     /**
@@ -64,7 +64,17 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        //
+        $book - Book::find($id);
+        if($book){
+            $book -> title = $request -> title;
+            $book -> description = $request -> description;
+            $book -> author = $request -> author;
+            $book -> publisher = $request -> publisher;
+            $book -> date_of_issue = $request -> date_of_issue;
+
+            $book->save();
+        }
+        return $book;
     }
 
     /**
@@ -87,6 +97,6 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return Book::destroy($id);
     }
 }
