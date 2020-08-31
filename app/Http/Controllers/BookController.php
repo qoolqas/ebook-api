@@ -15,7 +15,12 @@ class BookController extends Controller
      */
     public function index()
     {
-        return Book::get();
+        $book = Book::all();
+        if($book && $book->count() > 0){
+             return response(['message'=>'Show data success','data'=>$book],200);
+        }else{
+            return response(['message'=>'Data not found','data'=>null],404);
+        }
     }
 
     /**
@@ -36,13 +41,15 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        return Book::create([
+        $book = Book::create([
             "title" => $request->title,
             "description" => $request->description,
             "author" => $request->author,
             "publisher" => $request->publisher,
             "date_of_issue" => $request->date_of_issue,
-            ]);
+        ]);
+        return response(['message'=>'Create data success','data'=>$book],200);
+
     }
 
     /**
@@ -53,7 +60,12 @@ class BookController extends Controller
      */
     public function show($id)
     {
-        return Book::find($id);
+        $book = Book::find($id);
+        if($book && $book->count() > 0){
+            return response(['message'=>'Show data success','data'=>$book],200);
+       }else{
+           return response(['message'=>'Data not found','data'=>null],404);
+       }
     }
 
     /**
@@ -73,8 +85,11 @@ class BookController extends Controller
             $book -> date_of_issue = $request -> date_of_issue;
 
             $book->save();
+            return response(['message'=>'Update data success','data'=>$book],200);
+        }else{
+            return response(['message'=>'Update data failed','data'=>null],404);
         }
-        return $book;
+      
     }
 
     /**
@@ -97,6 +112,10 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        return Book::destroy($id);
+        $book = Book::destroy($id);
+        if($book){
+            $book > delete();
+            return response([],204);
+        }
     }
 }
