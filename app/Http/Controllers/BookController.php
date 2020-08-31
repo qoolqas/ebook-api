@@ -89,7 +89,6 @@ class BookController extends Controller
         }else{
             return response(['message'=>'Update data failed','data'=>null],404);
         }
-      
     }
 
     /**
@@ -116,6 +115,8 @@ class BookController extends Controller
         if($book){
             $book > delete();
             return response([],204);
+        }else{
+            return response(['message'=>'Delete data failed','data'=>null],404);
         }
     }
 }
