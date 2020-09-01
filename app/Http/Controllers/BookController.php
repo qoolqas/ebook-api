@@ -76,19 +76,7 @@ class BookController extends Controller
      */
     public function edit($id)
     {
-        $book - Book::find($id);
-        if($book){
-            $book -> title = $request -> title;
-            $book -> description = $request -> description;
-            $book -> author = $request -> author;
-            $book -> publisher = $request -> publisher;
-            $book -> date_of_issue = $request -> date_of_issue;
-
-            $book->save();
-            return response(['message'=>'Update data success','data'=>$book],200);
-        }else{
-            return response(['message'=>'Update data failed','data'=>null],404);
-        }
+      
     }
 
     /**
@@ -100,7 +88,19 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $book = Book::find($id);
+        if($book){
+            $book->title = $request->title;
+            $book->description = $request->description;
+            $book->author = $request->author;
+            $book->publisher = $request->publisher;
+            $book->date_of_issue = $request->date_of_issue;
+
+            $book->save();
+            return response(['message'=>'Update data success','data'=>$book],200);
+        }else{
+            return response(['message'=>'Update data failed','data'=>null],404);
+        }
     }
 
     /**
