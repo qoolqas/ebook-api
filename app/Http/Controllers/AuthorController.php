@@ -68,6 +68,7 @@ class AuthorController extends Controller
            return response(['message'=>'Data not found','data'=>null],404);
        }
     }
+ 
 
     /**
      * Show the form for editing the specified resource.
@@ -123,4 +124,13 @@ class AuthorController extends Controller
             return response(['message'=>'Delete data failed','data'=>null],404);
         }
     }
+    public function searchNama(Request $request){
+        $data = $request->input('name');
+    $author = Author::find($id);
+    if($author && $author->count() > 0){
+        return response(['message'=>'Show data success','data'=>$author],200);
+   }else{
+       return response(['message'=>'Data not found','data'=>null],404);
+   }
+}
 }
